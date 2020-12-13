@@ -1,0 +1,16 @@
+header h1 {
+    padding: 10px;
+}
+
+.form-control {
+    border-top-right-radius: 0%;
+    border-bottom-right-radius: 0%;
+}
+
+.col-6 {
+    max-width: 100%;
+}
+
+.btn-block+.btn-block {
+    margin-top: 0rem;
+}
