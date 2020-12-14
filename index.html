@@ -19,18 +19,18 @@
 
     <main class="flex-row justify-space-between">
         <div class="row">
-            <div class="col-12 col-md-3 bg-light">
-                <form>
-                    <label for="search-bar">Search for a City</label>
+            <div class="col-12 col-md-3 bg-light px-md-5">
+                <form id="city-search">
+                    <label for="search-bar" class="font-weight-bold">Search for a City</label>
                     <div class="input-group mb-3">
                         <div class="input-group-append">
-                            <input type="text" class="form-control" id="city-search">
+                            <input type="text" class="form-control" id="city-name">
                             <button type="submit" id="search-btn" class="btn btn-primary fas fa-search"></button>
                         </div>
                     </div>
                 </form>
 
-                <div id="city-names">
+                <div id="previous-city-names">
                     <button class="btn btn-block border text-left">temp New York</button>
                     <button class="btn btn-block border text-left">temp Los Angeles</button>
                 </div>
