@@ -14,3 +14,24 @@ header h1 {
 .btn-block+.btn-block {
     margin-top: 0rem;
 }
+
+.list-group-item {
+    border: none;
+}
+
+.favorable {
+    background-color: green;
+    color: white;
+    border-radius: 10%;
+}
+
+.moderate {
+    background-color: yellow;
+    border-radius: 10%;
+}
+
+.severe {
+    background-color: red;
+    color: white;
+    border-radius: 10%;
+}
