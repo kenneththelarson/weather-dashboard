@@ -17,15 +17,15 @@
         <h1 class="text-light bg-dark text-center">Weather Dashboard</h1>
     </header>
 
-    <main>
-        <div class="col col-md-4">
-            <div class="col-6">
+    <main class="flex-row justify-space-between">
+        <div class="row">
+            <div class="col-12 col-md-3">
                 <form>
                     <label for="search-bar">Search for a City</label>
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                             <input type="text" class="form-control" id="city-search">
-                            <button id="search-btn" class="btn btn-primary fas fa-search"></button>
+                            <button type="submit" id="search-btn" class="btn btn-primary fas fa-search"></button>
                         </div>
                     </div>
                 </form>
@@ -35,6 +35,17 @@
                     <button class="btn btn-block border text-left">temp Los Angeles</button>
                 </div>
 
+            </div>
+
+            <div class="col-12 col-md-9">
+                <div class="row border current-weather">
+                    <div id="current-weather-container" class="col-12">temp</div>
+                </div>
+
+                <div id="5-day-forcast" class="row border">
+                    <h3>5-Day Forecast:</h3>
+                    <div class="forcast-container"></div>
+                </div>
             </div>
         </div>
 
