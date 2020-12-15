@@ -133,4 +133,13 @@ var loadPrevious = function() {
     }
 };
 
+var cityBtns = function(event) {
+    var city = event.target.getAttribute("data-city");
+    if (city) {
+        getCityWeather(city);
+    }
+};
+
 cityFormEl.addEventListener("submit", searchCityInput);
+previousCityBtnEl.addEventListener("click", cityBtns);
+loadPrevious();
