@@ -4,6 +4,7 @@ var cityInputEl = document.querySelector("#city-name");
 var currentWeatherEl = document.querySelector("#current-weather-container");
 var currentCityTitleEL = document.querySelector("#current-city");
 var cityTitleEl = document.querySelector("#city-title");
+var previousCityBtnEl = document.querySelector("#previous-city-names");
 var cities = [];
 
 var searchCityInput = function (event) {
@@ -26,7 +27,7 @@ var getCityWeather = function (city) {
         if (response.ok) {
             response.json().then(function (data) {
                 loadWeather(data, city);
-                console.log(data);
+                saveCurrentCity(city);
             })
         }
         else {
@@ -39,7 +40,6 @@ var getCityWeather = function (city) {
 
 var loadWeather = function (weather, currentCity) {
     currentCity = weather.name;
-    console.log(weather.name);
     currentWeatherEl.textContent = "";
     cityTitleEl.textContent = currentCity;
     currentWeatherEl.classList.add("border", "p-2");
@@ -56,7 +56,6 @@ var loadWeather = function (weather, currentCity) {
     tempEl.textContent = "Temperature: " + weather.main.temp + " °F";
     tempEl.classList = "list-group-item";
     currentWeatherEl.appendChild(tempEl);
-    console.log(tempEl);
 
     var humidityEl = document.createElement("span");
     humidityEl.textContent = "Humidity: " + weather.main.humidity + "%";
@@ -118,7 +117,7 @@ var saveCurrentCity = function(currentCity) {
 };
 
 var pastSearch = function(previousCity) {
-    previousCityEl = document.createElement("button");
+    var previousCityEl = document.createElement("button");
     previousCityEl.textContent = previousCity;
     previousCityEl.classList = "btn btn-block border text-left";
     previousCityEl.setAttribute("data-city", previousCity);
