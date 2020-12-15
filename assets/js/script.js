@@ -4,6 +4,7 @@ var cityInputEl = document.querySelector("#city-name");
 var currentWeatherEl = document.querySelector("#current-weather-container");
 var currentCityTitleEL = document.querySelector("#current-city");
 var cityTitleEl = document.querySelector("#city-title");
+var cities = [];
 
 var searchCityInput = function (event) {
     event.preventDefault();
@@ -19,12 +20,13 @@ var searchCityInput = function (event) {
 };
 
 var getCityWeather = function (city) {
-    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey;
 
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
                 loadWeather(data, city);
+                console.log(data);
             })
         }
         else {
@@ -36,6 +38,8 @@ var getCityWeather = function (city) {
 };
 
 var loadWeather = function (weather, currentCity) {
+    currentCity = weather.name;
+    console.log(weather.name);
     currentWeatherEl.textContent = "";
     cityTitleEl.textContent = currentCity;
     currentWeatherEl.classList.add("border", "p-2");
@@ -52,6 +56,7 @@ var loadWeather = function (weather, currentCity) {
     tempEl.textContent = "Temperature: " + weather.main.temp + " °F";
     tempEl.classList = "list-group-item";
     currentWeatherEl.appendChild(tempEl);
+    console.log(tempEl);
 
     var humidityEl = document.createElement("span");
     humidityEl.textContent = "Humidity: " + weather.main.humidity + "%";
@@ -75,7 +80,6 @@ var getUvIndex = function (latitude, longitude) {
     fetch(apiUV).then(function (response) {
         response.json().then(function (data) {
             displayUV(data);
-            console.log(data);
         });
     });
 };
@@ -100,6 +104,34 @@ var displayUV = function(data) {
 
     uvEl.appendChild(uvCondition);
     currentWeatherEl.appendChild(uvEl);
-}
+};
+
+var saveCurrentCity = function(currentCity) {
+    if (cities.indexOf(currentCity) !== -1) {
+        return;
+    }
+    else {
+        cities.push(currentCity);
+        localStorage.setItem("cities", JSON.stringify(cities));
+        pastSearch(currentCity);
+    };
+};
+
+var pastSearch = function(previousCity) {
+    previousCityEl = document.createElement("button");
+    previousCityEl.textContent = previousCity;
+    previousCityEl.classList = "btn btn-block border text-left";
+    previousCityEl.setAttribute("data-city", previousCity);
+    previousCityEl.setAttribute("type", "submit");
+
+    previousCityBtnEl.prepend(previousCityEl);
+};
+
+var loadPrevious = function() {
+    cities = JSON.parse(localStorage.getItem("cities")) || [];
+    for (i = 0; i < cities.length; i++) {
+        pastSearch(cities[i]);
+    }
+};
 
 cityFormEl.addEventListener("submit", searchCityInput);
