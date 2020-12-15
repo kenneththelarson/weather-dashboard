@@ -71,6 +71,7 @@ var loadWeather = function (weather, currentCity) {
     var longitude = weather.coord.lon;
 
     getUvIndex(latitude, longitude);
+    getForecast(currentCity);
 };
 
 var getUvIndex = function (latitude, longitude) {
@@ -138,6 +139,16 @@ var cityBtns = function(event) {
     if (city) {
         getCityWeather(city);
     }
+};
+
+var getForecast = function(city) {
+    var api5Day = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey;
+    
+    fetch(api5Day).then(function(response) {
+        response.json().then(function(data) {
+            console.log(data);
+        });
+    });
 };
 
 cityFormEl.addEventListener("submit", searchCityInput);
